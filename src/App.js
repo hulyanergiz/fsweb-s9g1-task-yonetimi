@@ -5,22 +5,29 @@ import TaskForm from "./TaskForm";
 import TaskHookForm from "./TaskHookForm";
 import PeopleForm from "./PeopleForm";
 import { initialTasks, initialTeam } from "./data";
-
+import { toast } from "react-toastify";
 
 function App() {
   const [tasks, setTasks] = useState(initialTasks);
   const [team, setTeam] = useState(initialTeam);
 
   function handleTaskSubmit(yeniTask) {
-    setTasks([yeniTask, ...tasks])
+    setTasks([yeniTask, ...tasks]);
   }
 
   function handlePeopleSubmit(yeniKisi) {
-    setTeam([...team, yeniKisi])
+    setTeam([...team, yeniKisi]);
   }
 
   function handleComplete(id) {
-    console.log("tamamlama fonksiyonunu buraya yazın")
+    const guncelTasks = tasks.map((item) => {
+      if (item.id === id) {
+        return { ...item, status: "yapıldı" };
+      }
+      return item;
+    });
+    setTasks(guncelTasks);
+    toast.success("Task tamamlandı");
   }
 
   return (
@@ -42,9 +49,13 @@ function App() {
           <h2 className="column-title">Yapılacaklar</h2>
           <div className="column-list">
             {tasks
-              .filter((t) => t.status === "yapılacak")
-              .map((t) => (
-                <Task key={t.id} taskObj={t} onComplete={handleComplete} />
+              .filter((item) => item.status === "yapılacak")
+              .map((item) => (
+                <Task
+                  key={item.id}
+                  taskObj={item}
+                  onComplete={handleComplete}
+                />
               ))}
           </div>
         </div>
@@ -52,14 +63,13 @@ function App() {
           <h2 className="column-title">Tamamlananlar</h2>
           <div className="column-list">
             {tasks
-              .filter((t) => t.status === "yapıldı")
-              .map((t) => (
-                <Task key={t.id} taskObj={t} />
+              .filter((item) => item.status === "yapıldı")
+              .map((item) => (
+                <Task key={item.id} taskObj={item} />
               ))}
           </div>
         </div>
       </div>
-
     </div>
   );
 }
