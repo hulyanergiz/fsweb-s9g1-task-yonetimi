@@ -5,7 +5,8 @@ import TaskForm from "./TaskForm";
 import TaskHookForm from "./TaskHookForm";
 import PeopleForm from "./PeopleForm";
 import { initialTasks, initialTeam } from "./data";
-import { toast } from "react-toastify";
+import { Zoom, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [tasks, setTasks] = useState(initialTasks);
@@ -70,6 +71,13 @@ function App() {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="bottom-left"
+        theme="dark"
+        autoClose={3000}
+        transition={Zoom}
+        newestOnTop={false}
+      />
     </div>
   );
 }
