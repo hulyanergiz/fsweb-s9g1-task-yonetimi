@@ -1,5 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { Slide, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PeopleForm = ({ kisiler, submitFn }) => {
   const {
@@ -10,6 +12,7 @@ const PeopleForm = ({ kisiler, submitFn }) => {
 
   function handleSubmitFn(e) {
     submitFn(e.title);
+    toast.success("Kişilere yeni kişi eklendi");
   }
 
   return (
