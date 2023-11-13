@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Slide, ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const initialForm = {
@@ -24,7 +24,7 @@ export default function TaskHookForm({ kisiler, submitFn }) {
       id: nanoid(5),
       status: "yapılacak",
     });
-    toast.success("Task yapılacaklar listesine eklendi");
+    toast.success(`${formData.title} taskı yapılacaklar listesine eklendi`);
   };
   return (
     <div>
